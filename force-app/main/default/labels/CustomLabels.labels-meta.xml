@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Churn_Case_Record_Type_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Churn Case Record Type Id</shortDescription>
+        <value>012VF0000027FSbYAM</value>
+    </labels>
+    <labels>
+        <fullName>Level_1_EC_CO_RN_Approver</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Level 1 EC/CO/RN Approver</shortDescription>
+        <value>bpitz@teamascend.com</value>
+    </labels>
+    <labels>
+        <fullName>Level_1_New_Logo_Approver</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Level 1 New Logo Approver</shortDescription>
+        <value>bpitz@teamascend.com</value>
+    </labels>
+    <labels>
+        <fullName>Level_2_Approver</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Level 2 Approver</shortDescription>
+        <value>bpitz@teamascend.com</value>
+    </labels>
+</CustomLabels>
