@@ -8,6 +8,7 @@
 | **Manifest** | [manifest/package.xml](manifest/package.xml) |
 | **Deploy 1** (requested list) | `0AfdL00000ht3R7SAI`: succeeded, 333 / 333 components, 0 errors |
 | **Deploy 2** (Product2 sync with Pilot) | `0AfdL00000hstZqSAI`: succeeded, 379 / 379 components, 0 errors |
+| **Deploy 3** (context definitions from Production) | `0AfdL00000i2zNpSAI`: succeeded, 2 / 2 components, 0 errors (2026-11-03) |
 
 ## Summary
 
@@ -19,7 +20,8 @@
 | Product2 fields synced from Pilot | 46 | Deployed |
 | Custom labels | 4 | Deployed |
 | Global value sets (added as dependency) | 1 | Deployed |
-| **Total in manifest** | **378** | |
+| Context definitions (from Production) | 2 | Deployed |
+| **Total in manifest** | **380** | |
 
 The deploy counts are higher than the manifest total because they also count the parent object stub of each standard object and the CustomLabels container. The stubs are empty, so they did not change any object settings.
 
@@ -37,6 +39,20 @@ Compared all Product2 custom fields with the Tooling API and a metadata retrieve
 After deploy 2, Ascend_Deployement has 55 Product2 custom fields, matching the 55 active fields in Pilot. Skipped deleted fields: `ProductCode_Custom_del__c`, `SKU_BusinessUnit_del__c`, `SKU_Category_del__c`, `SKU_Company_del__c`, `SKU_LOB_del__c`, `SKU_Product_del__c`, `SKU_Sequence_del__c`, `SKU_Subproduct_del__c`, `Service_Category_del__c`, `Service_Sub_Category_del__c`.
 
 Deploy 2 had no errors: none of the 46 fields use history tracking, global value sets or formulas. Its two lookups (`Primary_Vendor__c` to Account, `Service_Owner__c` to User) point to standard objects.
+
+## Context definitions: Production to Ascend_Deployement
+
+Retrieved from Production (`ProdOrg`, `jdarla@teamascend.com.prod`, read-only) on 2026-11-03 and deployed with deploy 3.
+
+| Context definition | Extends | Production version | Ascend version | Status |
+|---|---|---|---|---|
+| `Ascend_SalesTransactionContext` | `SalesTransactionContext__stdctx` 68.26 | 8 (active) | 2 (active) | Deployed |
+| `Ascend_ProductDiscoveryContext` | `ProductDiscoveryContext__stdctx` 1.2 | 2 (active) | 2 (active) | Deployed |
+
+- Version numbers restart in each org; the deployed content is the active Production version.
+- `Ascend_SalesTransactionContext` is about 2.2 MB (44 nodes, 886 attributes, 2,230 field mappings). The dry run (`0AfdL00000i2wjJSAQ`) and the deploy each took about 27 minutes.
+- No errors. The file carries the Production `externalServiceRegistrationId` `0LeUv000000028H` (AscendSalesTransactionContext); Ascend accepted it unchanged.
+- The contexts map some fields Ascend does not have (multi-currency `CurrencyIsoCode`, about 40 Production-only custom fields such as `QuoteLineItem.Cost_Price__c`, Sales Agreement objects). The deploy accepted them; test pricing and quoting in Ascend to confirm those mappings behave.
 
 ## Errors and resolution
 

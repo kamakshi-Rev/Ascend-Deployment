@@ -390,5 +390,10 @@
         <members>Service_Offering</members>
         <name>GlobalValueSet</name>
     </types>
+    <types>
+        <members>Ascend_ProductDiscoveryContext</members>
+        <members>Ascend_SalesTransactionContext</members>
+        <name>ContextDefinition</name>
+    </types>
     <version>67.0</version>
 </Package>
