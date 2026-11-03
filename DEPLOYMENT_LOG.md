@@ -9,6 +9,8 @@
 | **Deploy 1** (requested list) | `0AfdL00000ht3R7SAI`: succeeded, 333 / 333 components, 0 errors |
 | **Deploy 2** (Product2 sync with Pilot) | `0AfdL00000hstZqSAI`: succeeded, 379 / 379 components, 0 errors |
 | **Deploy 3** (context definitions from Production) | `0AfdL00000i2zNpSAI`: succeeded, 2 / 2 components, 0 errors (2026-11-03) |
+| **Deploy 4** (decision tables from Production) | `0AfdL00000i34iTSAQ`: succeeded, 2 / 2 components, 0 errors (2026-11-03) |
+| **Deploy 5** (pricing procedure v40 from Production) | `0AfdL00000i34vNSAQ`: succeeded, 1 / 1 components, 0 errors (2026-11-03) |
 
 ## Summary
 
@@ -21,7 +23,9 @@
 | Custom labels | 4 | Deployed |
 | Global value sets (added as dependency) | 1 | Deployed |
 | Context definitions (from Production) | 2 | Deployed |
-| **Total in manifest** | **380** | |
+| Decision tables (from Production) | 2 | Deployed |
+| Pricing procedures (from Production, active version only) | 1 | Deployed |
+| **Total in manifest** | **383** | |
 
 The deploy counts are higher than the manifest total because they also count the parent object stub of each standard object and the CustomLabels container. The stubs are empty, so they did not change any object settings.
 
@@ -53,6 +57,45 @@ Retrieved from Production (`ProdOrg`, `jdarla@teamascend.com.prod`, read-only) o
 - `Ascend_SalesTransactionContext` is about 2.2 MB (44 nodes, 886 attributes, 2,230 field mappings). The dry run (`0AfdL00000i2wjJSAQ`) and the deploy each took about 27 minutes.
 - No errors. The file carries the Production `externalServiceRegistrationId` `0LeUv000000028H` (AscendSalesTransactionContext); Ascend accepted it unchanged.
 - The contexts map some fields Ascend does not have (multi-currency `CurrencyIsoCode`, about 40 Production-only custom fields such as `QuoteLineItem.Cost_Price__c`, Sales Agreement objects). The deploy accepted them; test pricing and quoting in Ascend to confirm those mappings behave.
+
+## Pricing procedure: Production to Ascend_Deployement
+
+"Ascend Revenue Management Standard Pricing Procedure" (`Rev_Mgmt_Default_Pricing_Procedure1`) retrieved from Production (read-only) on 2026-11-03.
+
+| Item | Production | Ascend after deploy |
+|---|---|---|
+| Versions | 37 (v1 to v40), only **v40 active** | **v40 only, active** ("Ascend Rev Management Procedure Final v40") |
+| Context definition | `Ascend_SalesTransactionContext` | `Ascend_SalesTransactionContext` (deploy 3) |
+
+Changes made to the **local copy only** before deploying (Production unchanged):
+
+1. Removed the 36 inactive versions; kept v40 (file 14 MB to 0.46 MB). A fresh retrieve brings all versions back.
+2. Replaced Production record Ids with the matching Ascend Ids:
+
+| Reference | Production Id | Ascend Id |
+|---|---|---|
+| Decision table Attribute_Based_Adjustment_Decision_Table | `0lDUv00000002eXMAQ` | `0lDdL000000FNAsUAO` |
+| Decision table Bundle_Based_Adjustment_Decision_Table | `0lDUv00000002g9MAA` | `0lDdL000000FNAtUAO` |
+| Decision table Contract_Pricing_Volume_Tiers | `0lDUv00000002jOMAQ` | `0lDdL000000FNBMUA4` |
+| Decision table Cost_Book_Entry | `0lDUv00000002xtMAA` | `0lDdL000000FgoXUAS` |
+| Decision table Price_Adjustment_Tier_Decision_Table | `0lDUv00000002bJMAQ` | `0lDdL000000FNAqUAO` |
+| Decision table Price_Book_Entry_Decision_Table_v2 | `0lDUv00000002ZhMAI` | `0lDdL000000FNAoUAO` |
+| Decision table Term_Discount | `0lDUv00000002xvMAA` | `0lDdL000000FgoYUAS` |
+| Price Adjustment Schedule "Standard Attribute Based Adjustment" (AttributePASIdConstant) | `84XUv000000MfqwMAC` | `84XdL000000SaADUA0` |
+| Price Adjustment Schedule "Standard Price Adjustment Tier" (VolumePASIdConstant) | `84XUv000000MfqvMAC` | `84XdL000000SaAHUA0` |
+
+Dependencies added in Ascend:
+
+- Decision tables `Cost_Book_Entry` and `Term_Discount` retrieved from Production and deployed (deploy 4). Both active and synced.
+- Pricing recipe `NGPDefaultRecipe` (Ascend `12GdL000008J2mIUAS`): added table mappings to match Production. These are data records, not metadata, so they are not in git:
+  - PriceAdjustmentMatrix to Term_Discount (`12IdL000007UHLxUAO`)
+  - ListPrice to Cost_Book_Entry (`12IdL000007UHNZUA4`)
+
+| # | Error | Cause | Fix | Status |
+|---|---|---|---|---|
+| 1 | Ensure that the lookup table in the PriceAdjustmentMatrix step is valid (step "Apply Term-Based Discount") | Term_Discount was not registered in the Ascend pricing recipe for PriceAdjustmentMatrix | Added the recipe table mapping; dry run `0AfdL00000i34s9SAA` then passed | Solved |
+
+Follow-up: Ascend has 0 `Term_Discount__c` records (Production has 917) and no cost book entries yet, so term discounts and cost lookups return nothing until that data is loaded.
 
 ## Errors and resolution
 

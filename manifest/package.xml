@@ -395,5 +395,14 @@
         <members>Ascend_SalesTransactionContext</members>
         <name>ContextDefinition</name>
     </types>
+    <types>
+        <members>Cost_Book_Entry</members>
+        <members>Term_Discount</members>
+        <name>DecisionTable</name>
+    </types>
+    <types>
+        <members>Rev_Mgmt_Default_Pricing_Procedure1</members>
+        <name>ExpressionSetDefinition</name>
+    </types>
     <version>67.0</version>
 </Package>
