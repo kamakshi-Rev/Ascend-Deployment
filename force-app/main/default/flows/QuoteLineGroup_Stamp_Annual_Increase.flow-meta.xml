@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Stamp_Annual_Increase</name>
+        <label>Stamp Annual Percent Increase</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>QuoteRampAnnualIncreaseService</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>quoteId</name>
+            <value>
+                <elementReference>$Record.QuoteId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>QuoteRampAnnualIncreaseService</nameSegment>
+    </actionCalls>
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>AC7. When a ramp segment is created or changed, copies the SECOND segment&apos;s Unit Price Uplift onto the quote&apos;s Annual % Increase. The second segment is chosen by StartDate, not by SortOrder or name, because RCA stamps amendment segments with SortOrder -999999999 and names them &quot;Year 2 - Amend&quot; or &quot;Segment 2&quot;. Entry is deliberately only Is Ramped: the Apex decides whether an uplift exists, so the flow needs no reference to Unit Price Uplift. QuoteRampAnnualIncreaseService catches every exception and uses partial-success DML, so this after-save action cannot roll back the ramp that triggered it.</description>
+    <environments>Default</environments>
+    <interviewLabel>QuoteLineGroup Stamp Annual Increase {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>QuoteLineGroup Stamp Annual Percent Increase</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Stamp_Annual_Increase</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>IsRamped</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>QuoteLineGroup</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Resource Request Assigned - HTML</name>
+    <style>none</style>
+    <subject>Resource Request {!WorkOrder.WorkOrderNumber} - {!WorkOrder.RecordType} - {!WorkOrder.Request_Type__c} {!WorkOrder.Resource_Type__c}</subject>
+    <textOnly>{!WorkOrder.CreatedBy} has assigned you the following Resource Request:
+
+Queue: {!WorkOrder.OwnerFullName}
+
+Subject: {!WorkOrder.Subject}
+Account: {!WorkOrder.Account}
+Dates: {!WorkOrder.StartDate} - {!WorkOrder.EndDate}
+
+Duration (Hrs): {!WorkOrder.Duration}
+Engagement Type: {!WorkOrder.Engagement_Type__c}
+
+Preferred Person/Vendor: {!WorkOrder.Preferred_Person_s__c}{!WorkOrder.Preferred_Vendor__c}
+
+Resource Type: {!WorkOrder.Resource_Type__c}
+- Sub-Type: {!WorkOrder.Resource_Sub_Type__c}
+
+Skillset: {!WorkOrder.Skillset__c}
+
+Description: {!WorkOrder.Description}
+
+
+For more details, click the following link: {!WorkOrder.Link}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

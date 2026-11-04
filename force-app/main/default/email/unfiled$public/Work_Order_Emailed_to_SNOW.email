@@ -1,0 +1,18 @@
+Hello,
+
+A new Work Order for scoping has been created in Salesforce.
+
+Account: {!WorkOrder.Account}
+Opportunity: {!WorkOrder.Opportunity__c}
+Opportunity Type: {!WorkOrder.Opportunity_Type__c}
+Request Type: {!WorkOrder.Request_Type__c}
+Preferred Person: {!WorkOrder.Preferred_Person_s__c}
+Type: {!WorkOrder.Type__c}
+Target Date: {!WorkOrder.Target_Date__c}
+
+Submitter: {!WorkOrder.CreatedBy}
+Description: {!WorkOrder.Description}
+
+Link: {!WorkOrder.Link}
+
+Thanks,

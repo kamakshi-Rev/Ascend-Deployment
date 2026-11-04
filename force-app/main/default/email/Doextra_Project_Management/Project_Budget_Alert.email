@@ -1,0 +1,6 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="1" aEditID="c1r1" >
+<![CDATA[<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">{!SFDC_Projects__c.Name}</div><div><font face="arial"><br></font></div><div><font face="arial">Estimated Hours: &nbsp;{!SFDC_Projects__c.Total_Estimated_Hours__c}</font></div><div><font face="arial">Actual Billable Hours: &nbsp;{!SFDC_Projects__c.Total_Billable_Hours_Worked__c}</font></div><div><font face="arial">Remaining Hours: &nbsp;{!SFDC_Projects__c.Hours_Remaining__c}</font></div><div><font face="arial"><br></font></div><div><font face="arial">click the link below to view the Project in SFDC</font></div><div><font face="arial">{!SFDC_Projects__c.Link}</font></div>]]></td>
+</tr>
+</table>

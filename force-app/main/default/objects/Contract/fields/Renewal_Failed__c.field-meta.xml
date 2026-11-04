@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Renewal_Failed__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Set by Automatically Renew Expiring Assets when automated renewal creation failed. While checked the scheduled flow skips this contract; clear it to retry.</description>
+    <label>Renewal Failed</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

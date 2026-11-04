@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_Mismatch_Flag</name>
+        <label>Assign Mismatch Flag</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Ramp_Start_Date_Mismatch__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>IsMismatchFormula</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Should_Process</name>
+        <label>New Record or Start Date Changed?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>No change — skip</defaultConnectorLabel>
+        <rules>
+            <name>Should_Evaluate</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ShouldEvaluateFormula</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_First_Segment</targetReference>
+            </connector>
+            <label>Evaluate</label>
+        </rules>
+    </decisions>
+    <description>Recalculates Quote.Ramp_Start_Date_Mismatch__c on insert, and on update whenever the Quote&apos;s Start Date is edited after the Ramp Schedule already exists, comparing it against the earliest (first) Ramp Schedule segment&apos;s Start Date. Complements QLG_Set_Ramp_Start_Date_Mismatch (segment dates set/changed) and QLG_Recalculate_Ramp_Start_Date_Mismatch_On_Delete (segment removed). Running on insert covers a Quote created via API with its Start Date set and ramp segments reparented onto it in the same transaction, which an update-only trigger would miss.
+
+NOTE: this comparison formula is intentionally duplicated from the shared subflow Evaluate_Ramp_Start_Date_Mismatch (used by the other two ramp-mismatch flows) rather than calling it, because Salesforce does not allow Subflow elements in a before-save (RecordBeforeSave) flow. This flow must stay before-save so it can assign $Record.Ramp_Start_Date_Mismatch__c directly with no extra DML. If the comparison logic in the subflow changes, mirror the change here too.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>IsMismatchFormula</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(ISBLANK({!Get_First_Segment.StartDate}), false, IF(ISBLANK({!$Record.StartDate}), true, {!Get_First_Segment.StartDate} &lt;&gt; {!$Record.StartDate}))</expression>
+    </formulas>
+    <formulas>
+        <name>ShouldEvaluateFormula</name>
+        <dataType>Boolean</dataType>
+        <expression>OR(ISNEW(), ISCHANGED({!$Record.StartDate}))</expression>
+    </formulas>
+    <interviewLabel>Quote Recalculate Ramp Start Date Mismatch {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Quote - Recalculate Ramp Start Date Mismatch</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_First_Segment</name>
+        <label>Get Earliest Ramp Segment for Quote</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Mismatch_Flag</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>QuoteId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>IsRamped</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>QuoteLineGroup</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>StartDate</queriedFields>
+        <sortField>StartDate</sortField>
+        <sortOrder>Asc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <runInMode>SystemModeWithoutSharing</runInMode>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Should_Process</targetReference>
+        </connector>
+        <filterFormula>OR(ISNEW(), ISCHANGED({!$Record.StartDate}))</filterFormula>
+        <object>Quote</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

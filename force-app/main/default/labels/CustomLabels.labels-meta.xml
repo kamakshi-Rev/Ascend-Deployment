@@ -28,4 +28,201 @@
         <shortDescription>Level 2 Approver</shortDescription>
         <value>bpitz@teamascend.com</value>
     </labels>
+    <labels>
+        <fullName>Company_Holiday_Project_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Company Holiday Project Id</shortDescription>
+        <value>a0OUv000002GfUHMA0</value>
+    </labels>
+    <labels>
+        <fullName>Feedback_Client_RecordTypeId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Stores the Record Type Id for the Client Feedback record type on Feedback</shortDescription>
+        <value>012Uv000007f60bIAA</value>
+    </labels>
+    <labels>
+        <fullName>Feedback_ListView_Internal_Prod_URL</fullName>
+        <categories>Project,Feedback,Email,URL,Internal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Internal Salesforce Lightning URL for the “My Pending Feedback” Feedback__c list</shortDescription>
+        <value>https://teamascend.lightning.force.com/lightning/o/Feedback__c/list?filterName=Pending_Feedback_Review</value>
+    </labels>
+    <labels>
+        <fullName>Opportunity_Allowed_Submitters</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Opportunity Allowed Submitters</shortDescription>
+        <value>00G3b000003Y7iJEAS</value>
+    </labels>
+    <labels>
+        <fullName>Ascend_Leadership_Role_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ascend Leadership Role Id</shortDescription>
+        <value>00E30000001UHO4EAO</value>
+    </labels>
+    <labels>
+        <fullName>Feedback_Internal_RecordTypeId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Stores the Record Type Id for the Internal Feedback record type on the Feedback</shortDescription>
+        <value>012Uv000007f60dIAA</value>
+    </labels>
+    <labels>
+        <fullName>Feedback_ListView_Community_URL</fullName>
+        <categories>Project,Feedback,Email,URL,Internal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Relative Experience Cloud URL for the “My Pending Feedback” Feedback__c list vie</shortDescription>
+        <value>https://teamascend.my.site.com/Contractors/s/recordlist/Feedback__c/00BUv000009ntELMAY</value>
+    </labels>
+    <labels>
+        <fullName>Ascend_Sales_Leaders_Role_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ascend Sales Leaders Role Id</shortDescription>
+        <value>00E5c0000021XxDEAU</value>
+    </labels>
+    <labels>
+        <fullName>Ascend_Solution_Leaders_Role_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ascend Solution Leaders Role Id</shortDescription>
+        <value>00E5c0000021XxhEAE</value>
+    </labels>
+    <labels>
+        <fullName>Feedback_Escalation_RecordTypeId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Stores the Record Type Id for the Escalation Feedback record type on Feedback</shortDescription>
+        <value>012Uv000007f60cIAA</value>
+    </labels>
+    <labels>
+        <fullName>SAS_Sales_Leaders_Role_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SAS Sales Leaders Role Id</shortDescription>
+        <value>00E5c0000021XxSEAU</value>
+    </labels>
+    <labels>
+        <fullName>ers_CancelButton</fullName>
+        <categories>buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>ers_ClearFilterAction</fullName>
+        <categories>actions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Clear Filter</shortDescription>
+        <value>Clear Filter</value>
+    </labels>
+    <labels>
+        <fullName>ers_ClearSelectionButton</fullName>
+        <categories>buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Clear Selection</shortDescription>
+        <value>Clear Selection</value>
+    </labels>
+    <labels>
+        <fullName>ers_ColumnHeader</fullName>
+        <categories>headers</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Column</shortDescription>
+        <value>Column</value>
+    </labels>
+    <labels>
+        <fullName>ers_EmptyTableMessage</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Empty</shortDescription>
+        <value>This table currently has no data to display</value>
+    </labels>
+    <labels>
+        <fullName>ers_ErrorRequiredEntry</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required</shortDescription>
+        <value>This is a required entry.  At least 1 row must be selected.</value>
+    </labels>
+    <labels>
+        <fullName>ers_FilterHeader</fullName>
+        <categories>headers</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Filter</shortDescription>
+        <value>Filter</value>
+    </labels>
+    <labels>
+        <fullName>ers_LabelHeader</fullName>
+        <categories>headers</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label</shortDescription>
+        <value>Label</value>
+    </labels>
+    <labels>
+        <fullName>ers_SaveButton</fullName>
+        <categories>buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>ers_SetFilterAction</fullName>
+        <categories>actions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Set Filter</shortDescription>
+        <value>Set Filter</value>
+    </labels>
+    <labels>
+        <fullName>fsc_FieldIsNotSupportedMessage</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FieldIsNotSupportedMessage</shortDescription>
+        <value>Following fields are not supported:</value>
+    </labels>
+    <labels>
+        <fullName>fsc_FieldTypeNotSuportedMessage</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>fsc_FieldTypeNotSuportedMessage</shortDescription>
+        <value>You provided an unsupported value for the DataTypeFilter input on Object and Field Picker. Currently the only supported value is ’picklist’</value>
+    </labels>
+    <labels>
+        <fullName>fsc_Key_Label</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Key Label</shortDescription>
+        <value>Key</value>
+    </labels>
+    <labels>
+        <fullName>fsc_NonePicklistValueLabel</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NonePicklistValueLabel</shortDescription>
+        <value>-- None --</value>
+    </labels>
+    <labels>
+        <fullName>fsc_Value_Label</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Value Label</shortDescription>
+        <value>Value</value>
+    </labels>
 </CustomLabels>

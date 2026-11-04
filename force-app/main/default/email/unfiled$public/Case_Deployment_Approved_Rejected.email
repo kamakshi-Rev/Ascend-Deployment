@@ -1,0 +1,11 @@
+<p><img title="image001" src="https://doextra--c.na104.content.force.com/file-asset-public/image001?oid=00DM0000000GTL5" alt="image001" width="156" height="41" /></p>
+<p>Your deployment request has been reviewed.</p>
+<p>The Change Management Status is <span style="color: #ff0000;"><strong>{!Case.Change_Management_Status__c}.</strong></span></p>
+<p><em>If the status above shows "Deployment in Progress" then the approval was rejected. You should review the case for what needs to be done.</em></p>
+<p>Case number:&nbsp; {!Case.CaseNumber}<br />Case Subject:&nbsp; {!Case.Subject}&nbsp;<br />Account Name:&nbsp; {!Case.Account}</p>
+<p>Link:&nbsp; {!Case.Link}</p>
+<p>Internal: {!ApprovalRequest.Internal_URL}</p>
+<p>External: {!ApprovalRequest.External_URL}</p>
+<p>Please use the link above to review the the case.</p>
+<p>Respectfully, <br />Ascend Salesforce Support<br /><a title="salesforce.support@teamascend.com" href="mailto:salesforce.support@teamascend.com">salesforce.support@teamascend.com</a></p>
+<p>&nbsp;</p>

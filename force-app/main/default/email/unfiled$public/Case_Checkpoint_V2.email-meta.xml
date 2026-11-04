@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>used in an alert in case after flow</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Case Checkpoint V2</name>
+    <style>none</style>
+    <subject>Ascend Case# {!Case.CaseNumber} status update.</subject>
+    <textOnly>{!Case.Contact},
+
+{!Case.Flow_Message_Text__c}
+
+Case Number: {!Case.CaseNumber}
+Case Subject: {!Case.Subject}
+
+Respectfully,
+{!Case.OwnerFullName}
+{!Case.Checkpoint_Flow_Team_Signature__c}
+{!Case.Checkpoint_Flow_Team_Email_Address__c}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Copies the line Start Date (the segment start) into Service Date so the native quote sync carries it to the Opportunity Product, where Opp Line Item: Before Flow uses it to find the quote line of the same segment.</description>
+        <name>Set_Service_Date</name>
+        <label>Set Service Date From Start Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.ServiceDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.StartDate</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Ramp quote lines only (line is in a ramped Quote Line Group): keeps Service Date equal to the line Start Date, setting it when blank and correcting it when it differs (a cloned or re-dated quote carries the old quote Service Dates). Non-ramp lines are never touched. Gives each ramp year a distinct Service Date so Quote Line Item to Opportunity Product matching can tell the years apart.</description>
+    <environments>Default</environments>
+    <interviewLabel>QuoteLineItem Stamp Segment Service Date {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>QuoteLineItem Stamp Segment Service Date</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Set_Service_Date</targetReference>
+        </connector>
+        <filterFormula>AND(
+    NOT(ISBLANK({!$Record.StartDate})),
+    NOT(ISBLANK({!$Record.QuoteLineGroupId})),
+    {!$Record.QuoteLineGroup.IsRamped},
+    OR(
+        ISBLANK({!$Record.ServiceDate}),
+        {!$Record.ServiceDate} &lt;&gt; {!$Record.StartDate}
+    )
+)</filterFormula>
+        <object>QuoteLineItem</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

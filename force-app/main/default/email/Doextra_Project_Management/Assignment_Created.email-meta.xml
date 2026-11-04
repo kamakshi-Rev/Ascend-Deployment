@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Used in email Alert which is used in Case Time Logging Flow</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Assignment Created</name>
+    <style>none</style>
+    <subject>An Assignment has been created</subject>
+    <textOnly>An Assignment has been created with the following information:  
+Account:  {!SFDC_Assignment__c.Account__c} 
+Project:  {!SFDC_Assignment__c.Projects__c} 
+Resource:  {!SFDC_Assignment__c.Resource__c} 
+Created By:  {!SFDC_Assignment__c.CreatedBy} 
+Hours:  {!SFDC_Assignment__c.Number_Of_Hours__c} 
+Start Date:  {!SFDC_Assignment__c.Start_Date__c} 
+End Date:  {!SFDC_Assignment__c.End_Date__c}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

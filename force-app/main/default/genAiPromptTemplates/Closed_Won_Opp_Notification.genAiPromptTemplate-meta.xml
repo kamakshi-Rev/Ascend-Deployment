@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>PWL7KLGAESLSY6BdW34leGL3ztyd9vWVR8wMJrpyvvs=_9</activeVersionIdentifier>
+    <description>Notification to SAS for Closed Won Opportunities</description>
+    <developerName>Closed_Won_Opp_Notification</developerName>
+    <masterLabel>Closed Won Opp Notification</masterLabel>
+    <overridable>false</overridable>
+    <templateVersions>
+        <content>Write a congratulatory email to the Ascend Sales Team regarding the successful closing of {!$Input:Opportunity.Name}. Be sure to mention the Opportunity Team ({!$Input:Opportunity.Opportunity_Team__c}), the value of the deal ({!$Input:Opportunity.Amount}), and thank them for their hard work in closing the deal.
+
+Include key fields in a simple table:
+- Project Delivery: {!$Input:Opportunity.Project_Type__c}
+- Opportunity Record Type: {!$Input:Opportunity.RecordType.Name}
+- LOB Rollup: {!$Input:Opportunity.Service_Offering_Rollup__c}
+
+</content>
+        <inputs>
+            <apiName>Opportunity</apiName>
+            <definition>SOBJECT://Opportunity</definition>
+            <masterLabel>Opportunity</masterLabel>
+            <referenceName>Input:Opportunity</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>0bIm6Y8rYwoF7hFtnPfF+8LTh2DmA7Kznk7S4k3atik=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>Write a congratulatory email to the entire SAS Team regarding the successful closing of {!$Input:Opportunity.Name}. Be sure to mention the Opportunity Team ({!$Input:Opportunity.Opportunity_Team__c}) and the value of the deal ({!$Input:Opportunity.Amount}). Be sure the messaging is personable and thanks everyone for their hard work in closing the deal.
+
+Include key fields in a simple table:
+- Project Delivery: {!$Input:Opportunity.Project_Type__c}
+- Opportunity Record Type: {!$Input:Opportunity.RecordType.Name}
+- LOB Rollup: {!$Input:Opportunity.Service_Offering_Rollup__c}
+
+</content>
+        <inputs>
+            <apiName>Opportunity</apiName>
+            <definition>SOBJECT://Opportunity</definition>
+            <masterLabel>Opportunity</masterLabel>
+            <referenceName>Input:Opportunity</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>0bIm6Y8rYwoF7hFtnPfF+8LTh2DmA7Kznk7S4k3atik=_2</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>Write a congratulatory email from Drew Tramel to the entire SAS Team regarding the successful closing of {!$Input:Opportunity.Name}. Be sure to mention the Opportunity Team ({!$Input:Opportunity.Opportunity_Team__c}) and the value of the deal ({!$Input:Opportunity.Amount}). Be sure the messaging is personable and thanks everyone for their hard work in closing the deal.
+
+Include key fields as simple bullet points:
+- Project Delivery: {!$Input:Opportunity.Project_Type__c}
+- Opportunity Record Type: {!$Input:Opportunity.RecordType.Name}
+- LOB Rollup: {!$Input:Opportunity.Service_Offering_Rollup__c}
+
+Do not include a Subject. 
+
+</content>
+        <inputs>
+            <apiName>Opportunity</apiName>
+            <definition>SOBJECT://Opportunity</definition>
+            <masterLabel>Opportunity</masterLabel>
+            <referenceName>Input:Opportunity</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>0bIm6Y8rYwoF7hFtnPfF+8LTh2DmA7Kznk7S4k3atik=_3</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>Write a congratulatory email to the entire SAS Team regarding the successful closing of {!$Input:Opportunity.Name}. Be sure to mention the Opportunity Team ({!$Input:Opportunity.Opportunity_Team__c}) and the value of the deal ({!$Input:Opportunity.Amount}). Be sure the messaging is personable and thanks everyone for their hard work in closing the deal.
+
+Include key fields as simple bullet points:
+- Project Delivery: {!$Input:Opportunity.Project_Type__c}
+- Opportunity Record Type: {!$Input:Opportunity.RecordType.Name}
+- LOB Rollup: {!$Input:Opportunity.Service_Offering_Rollup__c}
+
+Do not include a subject.
+
+</content>
+        <inputs>
+            <apiName>Opportunity</apiName>
+            <definition>SOBJECT://Opportunity</definition>
+            <masterLabel>Opportunity</masterLabel>
+            <referenceName>Input:Opportunity</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>0bIm6Y8rYwoF7hFtnPfF+8LTh2DmA7Kznk7S4k3atik=_4</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>Write an informal congratulatory email to the entire SAS Team regarding the successful closing of {!$Input:Opportunity.Name}. Be sure to mention the Opportunity Team ({!$Input:Opportunity.Opportunity_Team__c}) and the value of the deal (${!$Input:Opportunity.Amount}). Ensure the messaging is personable and thanks everyone for their hard work in closing the deal.
+
+Do not include a subject.
+
+</content>
+        <inputs>
+            <apiName>Opportunity</apiName>
+            <definition>SOBJECT://Opportunity</definition>
+            <masterLabel>Opportunity</masterLabel>
+            <referenceName>Input:Opportunity</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>0bIm6Y8rYwoF7hFtnPfF+8LTh2DmA7Kznk7S4k3atik=_5</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>Write an informal congratulatory email to the entire SAS Team regarding the successful closing of {!$Input:Opportunity.Name}. Be sure to mention the Opportunity Team ({!$Input:Opportunity.Opportunity_Team__c}) and the value of the deal (${!$Input:Opportunity.Amount}). Ensure the messaging is personable and thanks everyone for their hard work in closing the deal.
+
+Do not include a subject. Be sure to format the amount field to include a comma, if applicable. 
+
+</content>
+        <generationTemplateConfigs>
+            <generationConfigDeveloperName>einstein_gpt__enUsLanguageStyle</generationConfigDeveloperName>
+        </generationTemplateConfigs>
+        <inputs>
+            <apiName>Opportunity</apiName>
+            <definition>SOBJECT://Opportunity</definition>
+            <masterLabel>Opportunity</masterLabel>
+            <referenceName>Input:Opportunity</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>0bIm6Y8rYwoF7hFtnPfF+8LTh2DmA7Kznk7S4k3atik=_6</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>Your name is {!$User.FirstName}. You are writing an informal congratulatory email to the entire SAS Team regarding the successful closing of {!$Input:Opportunity.Name}. Be sure to mention {!$Input:Opportunity.Owner.Name} if the Opportunity Team ({!$Input:Opportunity.Opportunity_Team__c}) is not provided and the value of the deal (${!$Input:Opportunity.Amount}) . Ensure the messaging is personable and thanks everyone for their hard work in closing the deal.
+ 
+Do not include a subject. Be sure to format the amount field to include a comma, if applicable. 
+</content>
+        <generationTemplateConfigs>
+            <generationConfigDeveloperName>einstein_gpt__enUsLanguageStyle</generationConfigDeveloperName>
+        </generationTemplateConfigs>
+        <inputs>
+            <apiName>Opportunity</apiName>
+            <definition>SOBJECT://Opportunity</definition>
+            <masterLabel>Opportunity</masterLabel>
+            <referenceName>Input:Opportunity</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Draft</status>
+        <versionIdentifier>PWL7KLGAESLSY6BdW34leGL3ztyd9vWVR8wMJrpyvvs=_7</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>Your name is {!$User.FirstName}. You are writing an informal congratulatory email to the entire SAS Team regarding the successful closing of {!$Input:Opportunity.Name}. Be sure to mention {!$Input:Opportunity.Owner.Name} , and Opportunity Team ({!$Input:Opportunity.Opportunity_Team__c}), only if provided and the value of the deal (${!$Input:Opportunity.Amount}) . Ensure the messaging is personable and thanks everyone in the team for their hard work in closing the deal.
+ 
+Do not include a subject. Be sure to format the amount field to include a comma, if applicable. 
+</content>
+        <generationTemplateConfigs>
+            <generationConfigDeveloperName>einstein_gpt__enUsLanguageStyle</generationConfigDeveloperName>
+        </generationTemplateConfigs>
+        <inputs>
+            <apiName>Opportunity</apiName>
+            <definition>SOBJECT://Opportunity</definition>
+            <masterLabel>Opportunity</masterLabel>
+            <referenceName>Input:Opportunity</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Draft</status>
+        <versionIdentifier>PWL7KLGAESLSY6BdW34leGL3ztyd9vWVR8wMJrpyvvs=_8</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>Your name is {!$User.FirstName}. You are writing an informal congratulatory email to the entire SAS Team regarding the successful closing of {!$Input:Opportunity.Name}. Be sure to mention {!$Input:Opportunity.Owner.Name} , and Opportunity Team ({!$Input:Opportunity.Opportunity_Team__c}), only if provided and the value of the deal (${!$Input:Opportunity.Amount}) . Ensure the messaging is personable and thanks everyone in the team for their hard work in closing the deal.
+ 
+Do not include a subject. Be sure to format the amount field to include a comma, if applicable. 
+</content>
+        <generationTemplateConfigs>
+            <generationConfigDeveloperName>einstein_gpt__enUsLanguageStyle</generationConfigDeveloperName>
+        </generationTemplateConfigs>
+        <inputs>
+            <apiName>Opportunity</apiName>
+            <definition>SOBJECT://Opportunity</definition>
+            <masterLabel>Opportunity</masterLabel>
+            <referenceName>Input:Opportunity</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>PWL7KLGAESLSY6BdW34leGL3ztyd9vWVR8wMJrpyvvs=_9</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

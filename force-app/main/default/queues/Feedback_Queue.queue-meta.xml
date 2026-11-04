@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Central review queue for newly submitted Feedback records. Items in this queue are awaiting leadership review, evaluation, and next steps.</description>
+    <doesIncludeBosses>true</doesIncludeBosses>
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Feedback Queue</name>
+    <queueSobject>
+        <sobjectType>Feedback__c</sobjectType>
+    </queueSobject>
+</Queue>

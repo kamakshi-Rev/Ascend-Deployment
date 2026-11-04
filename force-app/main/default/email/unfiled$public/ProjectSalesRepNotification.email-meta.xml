@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Used in email alert from Project: Scheduled Flow</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Project Sales Rep Notification</name>
+    <style>none</style>
+    <subject>{!SFDC_Projects__c.Name} - Mid-Project Salesforce AE Connect</subject>
+    <textOnly>Now may be a good time to reconnect with the Salesforce AE on this Account and discuss account planning, future phases, roadmap, etc.! This project has been flagged because it is at least 200 hours and we’ve reached 50% completion of the project hours. Ensuring you have a great grasp on the status of the project and any future goals that have been shared, and connecting with the Salesforce AE at this time, would be a great way to bring value to the relationship.</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

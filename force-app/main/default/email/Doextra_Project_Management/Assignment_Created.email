@@ -1,0 +1,2 @@
+<p>An Assignment has been created with the following information:</p>
+<p>Account: {!SFDC_Assignment__c.Account__c}<br />Project: {!SFDC_Assignment__c.Projects__c}<br />Resource: {!SFDC_Assignment__c.Resource__c}<br />Created By: {!SFDC_Assignment__c.CreatedBy}<br />Hours: {!SFDC_Assignment__c.Number_Of_Hours__c}<br />Start Date: {!SFDC_Assignment__c.Start_Date__c}<br />End Date: {!SFDC_Assignment__c.End_Date__c}</p>

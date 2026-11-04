@@ -1,0 +1,9 @@
+An assignment has been created in Salesforce for {!SFDC_Assignment__c.Resource__c}.
+
+Project Name:  {!SFDC_Assignment__c.Projects__c}
+
+Account Name: {!SFDC_Assignment__c.Account__c}
+
+Document Requirements: {!SFDC_Assignment__c.00N1O00000B9lyC}
+
+Assignment Link:  {!SFDC_Assignment__c.Link}

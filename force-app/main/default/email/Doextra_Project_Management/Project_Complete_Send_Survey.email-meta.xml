@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Doextra_Letterhead</letterhead>
+    <name>Project Complete - Send Survey</name>
+    <style>freeForm</style>
+    <subject>Project Complete Send Satisfaction Survey</subject>
+    <textOnly>Hello,
+
+The following project is now complete. Please reach out to the client&apos;s project manager and submit the satisfaction survey.
+
+Thank you!
+
+Project Information:
+Project Name: {!SFDC_Projects__c.Name}
+Account : {!SFDC_Projects__c.Account__c}
+
+Link to Project: {!SFDC_Projects__c.Link}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

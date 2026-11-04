@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Stamp_Original_End_Date</name>
+        <label>Stamp Original End Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Original_End_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.EndDate</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Need_to_Sync_Contract_Status</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Sync_Contract_Status</name>
+        <label>Sync Contract Status</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Contract_Status__c</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Is_First_Activation</name>
+        <label>Is First Activation?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Need_to_Sync_Contract_Status</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No — skip</defaultConnectorLabel>
+        <rules>
+            <name>First_Activation</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Contract_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Activated</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Original_End_Date__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Stamp_Original_End_Date</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Need_to_Sync_Contract_Status</name>
+        <label>Need to Sync Contract Status?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Contract_Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Contract_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Contract Expired</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Contract_Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Contract Terminated</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Activated</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Sync_Contract_Status</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <description>Runs before Contract save. Sets the Contract Name from the Source Opportunity. On first activation, stamps Original_End_Date__c with the EndDate (write-once — never overwritten by amendments or renewals).</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Name of the contract</description>
+        <name>ContractName</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!$Record.SourceOpportunityId}), {!$Record.Name}, {!$Record.SourceOpportunity.Name})</expression>
+    </formulas>
+    <formulas>
+        <name>statusCategoryFx</name>
+        <dataType>String</dataType>
+        <expression>CASE(
+  TEXT({!$Record.Contract_Status__c}), 
+  &quot;Draft&quot;, &quot;Draft&quot;, 
+  &quot;Signed&quot;, &quot;Signed&quot;,
+  &quot;Onboarding&quot;, &quot;Signed&quot;,
+  &quot;Activated&quot;, &quot;Activated&quot;,
+  &quot;Draft&quot;
+)</expression>
+    </formulas>
+    <interviewLabel>Contract Before Save {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Contract Before Save</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Is_First_Activation</targetReference>
+        </connector>
+        <object>Contract</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

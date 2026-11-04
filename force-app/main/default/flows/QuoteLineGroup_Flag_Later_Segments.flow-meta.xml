@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Flag_Later_Segments</name>
+        <label>Flag Later Ramp Segments</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>QuoteSegmentFlagService</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>quoteId</name>
+            <value>
+                <elementReference>$Record.QuoteId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>QuoteSegmentFlagService</nameSegment>
+    </actionCalls>
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>When a ramp segment is created, or its StartDate or SortOrder changes, re-ranks the quote segments and sets Is_Later_Segment__c on every segment that is not the first (earliest StartDate). The flag update itself does not retrigger this flow because it changes neither StartDate nor SortOrder. QuoteSegmentFlagService catches every exception and uses partial-success DML, so this after-save action cannot roll back the ramp save.</description>
+    <environments>Default</environments>
+    <interviewLabel>QuoteLineGroup_Flag_Later_Segments {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>QuoteLineGroup Flag Later Segments</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Flag_Later_Segments</targetReference>
+        </connector>
+        <filterFormula>OR(
+    ISNEW(),
+    ISCHANGED({!$Record.StartDate}),
+    ISCHANGED({!$Record.SortOrder})
+)</filterFormula>
+        <object>QuoteLineGroup</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
