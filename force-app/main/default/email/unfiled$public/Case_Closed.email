@@ -1,0 +1,6 @@
+<p><img title="image001" src="https://doextra.my.salesforce-sites.com/CustomImages/resource/1727204615000/Ascend_Logo_Blue_Text?" alt="image001" width="156" height="52" /></p>
+<p>{!Case.Contact},</p>
+<p>Your case has been&nbsp;closed. Please let us know if you have any additional questions about this case.</p>
+<p>Case Number {!Case.CaseNumber} <br />Case Subject {!Case.Subject}</p>
+<p>Respectfully, <br />Ascend Salesforce Support<br /><a title="salesforce.support@teamascend.com" href="mailto:salesforce.support@teamascend.com">salesforce.support@teamascend.com</a></p>
+<p>&nbsp;</p>

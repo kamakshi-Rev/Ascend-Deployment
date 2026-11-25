@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Flag_Later_Segments</name>
+        <label>Flag Later Ramp Segments</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>QuoteSegmentFlagService</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>quoteId</name>
+            <value>
+                <elementReference>$Record.QuoteId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>excludeGroupId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>QuoteSegmentFlagService</nameSegment>
+    </actionCalls>
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>When a segment is deleted, re-ranks the remaining segments of the quote. The deleted record still exists at before-delete time, so its Id is passed as Excluded Segment Id and ignored. If the first segment was deleted, the next-earliest becomes first.</description>
+    <environments>Default</environments>
+    <interviewLabel>QuoteLineGroup_Flag_Later_Segments_On_Delete {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>QuoteLineGroup Flag Later Segments On Delete</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Flag_Later_Segments</targetReference>
+        </connector>
+        <object>QuoteLineGroup</object>
+        <recordTriggerType>Delete</recordTriggerType>
+        <triggerType>RecordBeforeDelete</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

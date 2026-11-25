@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Estimate: Status In Progress Custom</name>
+    <style>none</style>
+    <subject>An Estimate for {!Project_Estimate__c.Opportunity__c} has been submitted in progress</subject>
+    <textOnly>{!Project_Estimate__c.LastModifiedBy} has submitted an Estimate in progress:
+
+
+
+Opportunity: {!Project_Estimate__c.Opportunity__c}
+
+Total Hours: {!Project_Estimate__c.Total_Hours__c}
+
+
+
+
+For more details, click the following link: {!Project_Estimate__c.Link}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

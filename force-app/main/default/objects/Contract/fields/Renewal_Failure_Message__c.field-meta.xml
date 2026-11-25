@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Renewal_Failure_Message__c</fullName>
+    <description>Reason the last automated renewal attempt failed (from Automatically Renew Expiring Assets).</description>
+    <externalId>false</externalId>
+    <label>Renewal Failure Message</label>
+    <length>255</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

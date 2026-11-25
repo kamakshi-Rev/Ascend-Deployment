@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Later_Segment__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Copied from Quote Line Item Is Later Segment on quote sync. True on Year 2+ ramp lines, which are excluded from the first-segment Booked MRR rollup. False/blank on every other line.</description>
+    <label>Is Later Segment</label>
+    <type>Checkbox</type>
+</CustomField>

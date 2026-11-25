@@ -1,0 +1,8 @@
+<p style="line-height: 1;"><span style="font-family: Calibri, sans-serif; font-size: 12px;">{!Project_Estimate__c.LastModifiedBy} has submitted an Estimate for approval:</span></p>
+<p style="line-height: 1;"><span style="font-family: Calibri, sans-serif; font-size: 12px;"><br></span></p>
+<hr style="line-height: 1;">
+<p style="line-height: 1;"><span style="font-family: Calibri, sans-serif; font-size: 12px;"><strong>Opportunity:</strong> {!Project_Estimate__c.Opportunity__c}</span></p>
+<p style="line-height: 1;"><span style="font-family: Calibri, sans-serif; font-size: 12px;"><strong>Total Hours:</strong> {!Project_Estimate__c.Total_Hours__c}</span></p>
+<p style="line-height: 1;"><span style="font-size: 12px;"><br></span></p>
+<hr style="line-height: 1;">
+<p style="line-height: 1;"><span style="font-family: Calibri, sans-serif; font-size: 12px;">For more details, click the following link: <a href="{!Project_Estimate__c.Link}">{!Project_Estimate__c.Link}</a></span></p>

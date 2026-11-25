@@ -1,0 +1,73 @@
+<messaging:emailTemplate subject="Project Budget of Hours is {!relatedTo.Budget_Percent_Completed__c}% Complete: {!relatedTo.Name}" recipientType="User" relatedToType="SFDC_Projects__c">
+<messaging:htmlEmailBody >
+        <style type="text/css" font-family="verdana" font-size="12px">
+            table {
+            border-width: 2px;
+            border-color: #FFFFFF;
+            background-color: #FFFFFF;
+            text-align: left;
+            }
+
+            td {
+            border-width: 8px;
+            padding: 0px;
+            border-color: #000000;
+            text-align: left;
+            background-color: #FFffff;
+            }
+
+            th { 
+            color: #000000;
+            border-width: 0px ;
+            width: 200px;
+            padding: 0px ;
+            border-color: #000000;
+            text-align: left;
+            background-color: #FFFFFF;
+            }
+        </style>
+<body>
+    <span style="color:#000000; font-weight:bold;">The following project has completed {!relatedTo.Budget_Percent_Completed__c}% of it's projected budget of hours.</span><br/><br/>
+    <table>
+    <tbody>
+                    <tr>
+                        <th> Project: </th>
+                        <td><a href="{!LEFT($Api.Partner_Server_URL_140,FIND('.com',$Api.Partner_Server_URL_140)+4)+RelatedTo.ID}">{!relatedTo.Name}</a></td>
+                    </tr>
+                    <tr>
+                        <th>Opportunity: </th>
+                        <td><a href="{!LEFT($Api.Partner_Server_URL_140,FIND('.com',$Api.Partner_Server_URL_140)+4)+RelatedTo.Opportunity__r.ID}">{!relatedTo.Opportunity__r.Name}</a></td>
+                    </tr>
+                    <tr>
+                        <th>Project Lead: </th>
+                        <td>{!relatedTo.Project_Lead__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <th>Sales Rep: </th>
+                        <td>{!relatedTo.Sales_Rep__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <th style="color:#ffffff;"> *** </th>
+                        <td style="color:#ffffff;"> *** </td>
+                    </tr>
+                    <tr>
+                        <th>Estimated Hours: </th>
+                        <td>{!relatedTo.Total_Estimated_Hours__c}</td>
+                    </tr>
+                    <tr>
+                        <th>Actual Billable Hours: </th>
+                        <td>{!relatedTo.Total_Billable_Hours_Worked__c}</td>
+                    </tr>
+                    <tr>
+                        <th>Remaining Hours: </th>
+                        <td>{!relatedTo.Hours_Remaining__c}</td>
+                    </tr>
+                    <tr>
+                        <th>Budget Percent Completed: </th>
+                        <td>{!relatedTo.Budget_Percent_Completed__c}%</td>
+                    </tr>
+    </tbody>
+    </table><br/>
+    </body>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

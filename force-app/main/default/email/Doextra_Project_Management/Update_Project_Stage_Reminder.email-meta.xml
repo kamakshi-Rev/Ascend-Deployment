@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Update Project Stage with accurate Stage and End Date</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Update Project Stage Reminder</name>
+    <style>none</style>
+    <subject>REMINDER:  Active Projects with past due End Date</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

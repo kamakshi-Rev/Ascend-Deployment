@@ -11,6 +11,7 @@
 | **Deploy 3** (context definitions from Production) | `0AfdL00000i2zNpSAI`: succeeded, 2 / 2 components, 0 errors (2026-11-03) |
 | **Deploy 4** (decision tables from Production) | `0AfdL00000i34iTSAQ`: succeeded, 2 / 2 components, 0 errors (2026-11-03) |
 | **Deploy 5** (pricing procedure v40 from Production) | `0AfdL00000i34vNSAQ`: succeeded, 1 / 1 components, 0 errors (2026-11-03) |
+| **Deploy 6** (Apex, triggers, flows + dependencies from Production) | `0AfdL00000i5D6YSAU`: succeeded, 1,820 / 1,820 components, 0 errors (2026-11-04). Manifest: [manifest/package-full.xml](manifest/package-full.xml) |
 
 ## Summary
 
@@ -96,6 +97,82 @@ Dependencies added in Ascend:
 | 1 | Ensure that the lookup table in the PriceAdjustmentMatrix step is valid (step "Apply Term-Based Discount") | Term_Discount was not registered in the Ascend pricing recipe for PriceAdjustmentMatrix | Added the recipe table mapping; dry run `0AfdL00000i34s9SAA` then passed | Solved |
 
 Follow-up: Ascend has 0 `Term_Discount__c` records (Production has 917) and no cost book entries yet, so term discounts and cost lookups return nothing until that data is loaded.
+
+## Apex, triggers and flows: Production to Ascend_Deployement (deploy 6)
+
+Source: all unmanaged, active Apex classes, triggers and flows in Production (`ProdOrg`, read-only). The Excel Apex sheet was not used as the source: 1,613 of its 1,834 names are managed-package classes (Agile Accelerator `agf`, Conga, Rollup Helper, etc.) that cannot be deployed.
+
+| Component | In Production | Deployed to Ascend | Active in Ascend |
+|---|---|---|---|
+| Apex classes | 221 | **219** | n/a |
+| Apex triggers | 22 | **20** | **20** |
+| Flows (active versions) | 199 | **180** | **180** |
+
+Verified in Ascend after the deploy with Tooling API / FlowDefinitionView queries. For 5 flows whose latest Production version is a draft, the **active** version was retrieved explicitly: Account_After_Flow v22, Case_Log_Case_Time v37, Estimate_Select_Features_Screen_Flow v3, Flow_Code_Error_Log_Create_Error_Log_Record v1, X24Files_Custom_Opportunity_Migrating_Existing_Document_to_24Files_Batch_Upload v9 (the last one is skipped, see below).
+
+### Dependencies deployed with them (from Production)
+
+| Type | Count | Notes |
+|---|---|---|
+| Custom objects | 44 | PSA/timesheets (`SFDC_Projects__c`, `SFDC_Assignment__c`, `SFDC_Timecard__c`, `Daily_Assignment__c`, `Timesheet__c`, ...), estimates, revenue, notes migration (`NAM*`, `NMT*`), `SoftValidationRule__c`, `ers_datatableConfig__c`, 2 platform events, 4 custom metadata types |
+| Custom fields on standard objects | 251 | Account, Opportunity, Case, Contact, WorkOrder, ContentVersion, ... |
+| Record types / business processes | 20 / 9 | Account, Case, Contact, Opportunity, WorkOrder |
+| Picklists | 13 standard value sets, 10 global value sets | |
+| Lightning web components | 47 | 61 in Production; 14 skipped (managed package `usf3`) |
+| Visualforce pages / static resources | 6 / 2 | |
+| Email alerts / templates / letterheads | 24 / 24 / 2 | |
+| Custom labels / custom permissions | 26 / 7 | |
+| Groups / queue / role | 7 / 1 / 1 | |
+| Other | | 3 compact layouts, 2 quick actions, 2 field sets, 1 Einstein prompt template |
+
+### Org settings changed in Ascend (to match Production)
+
+| Setting | Change | Why |
+|---|---|---|
+| Account Teams | enabled | `AccountTeamMember` used by Apex/flows |
+| Opportunity Teams | enabled | `OpportunityTeamMember` used by Apex/flows |
+| Security: Set Audit Fields upon Record Creation (`enableAuditFieldsInactiveOwner`) | enabled | notes/attachment migration classes write CreatedDate/CreatedById |
+| Revenue Management: Ramp Deals (`enableRampDeal`, `enableGroupRampPref`) | enabled | `QuoteLineGroup.IsRamped` used by Apex |
+
+### Changes made to the local copy only (Production unchanged)
+
+- History/feed tracking turned off on 44 standard-object fields (Ascend has no tracking on those objects / tracking limit).
+- Lightning record-page overrides removed from 15 custom objects (the record pages were not deployed; default pages are used).
+- List views `Daily_Assignment__c.My_Daily_Assignments` and `SFDC_Projects__c.FSC_Projects1` dropped (invalid scope / filter).
+- Queue `Feedback_Queue`: Production user members removed.
+- Role `AscendLeadership`: Case access Read to Edit (must not be below the Ascend org-wide default).
+- Opportunity record types: removed picklist value `Salesforce` + non-breaking space (not a valid value).
+- Email alerts: Production users, outside email addresses and the `Change_Management_Approvers` group removed from recipients; 5 alerts now go to the record owner only. Org-wide sender addresses (`*@teamascend.com`) replaced by the default workflow user. Workflow rules/field updates that came with the alert files were not deployed.
+- Letterheads `Ascend_Letter_Head`, `Doextra_Letterhead`: logo removed (logos are Documents in Production, one in the HubSpot package folder).
+- Prompt template `Closed_Won_Opp_Notification`: model `sfdc_ai__DefaultOpenAIGPT35Turbo` (retired) replaced by `sfdc_ai__DefaultOpenAIGPT4OmniMini`.
+- LWC `datatable`: Flow Builder configuration editor (`ers_datatableCPE`) reference removed; the component works unchanged at runtime.
+
+### Skipped (not deployed) and why
+
+| Component | Type | Reason |
+|---|---|---|
+| `RHX_OpportunityLineItem`, `RHX_Revenue`, `RHX_TEST_OpportunityLineItem`, `RHX_TEST_Revenue` | 2 triggers, 2 test classes | Rollup Helper managed package (`rh2`) not installed |
+| 6 `X24Files_*` flows, `Task_After_CREATE` | flows | 24Files / Office 365 managed package (`sfy_office365`) not installed |
+| `Conga_Sign_After_CREATE_or_UPDATE`, `Conga_Sign_Document_Create_or_Update_After` | flows | Conga Sign managed package not installed |
+| `Video_Call_Created_Record_Matching`, `Video_Call_w_No_Recording_Daily_Scheduled_Delete`, `Get_Internal_Participant_Details`, `Get_Most_Common_Email_Domain` | flows | VideoCall objects need an Einstein Conversation Insights license |
+| `Activities_Match_Email_to_Records_Custom` | flow | Einstein Activity Capture action not available |
+| `Project_After_Insert_Update` | flow | Uses `OpportunitySplit`; Opportunity Splits must be enabled in Setup first |
+| `Order_After` | flow | Overrides `revenue_o2aflows__o2aFlow`, which Ascend already overrides with `Custom_Assetize_Order_Flow` |
+| `Create_New_Opportunity` | flow | Uses `ecflc:flowIdRedirect` (managed package `ecflc`) |
+| `Datatable_Configuration_Wizard4` | flow | Uses `usf3` Apex types (managed package) |
+| `fsc_actionList3`, `fsc_dualListBox3`, `fsc_expressionBuilder3`, `fsc_fieldSelector3`, `fsc_flowPicker3`, `fsc_formulaBuilder3`, `fsc_pickObjectAndField3`, `fsc_sortingConfiguration3`, `fsc_transferMetadata3` | LWC | Import Apex classes/types from managed package `usf3` |
+| `ers_datatableCPE`, `fsc_flexcardCPE`, `fsc_flexcardFlow`, `fsc_quickChoiceCpe`, `fsc_quickChoiceFSC` | LWC | Use one of the `usf3`-dependent components above; no deployed flow uses them |
+
+Deploy history for this step: 6 dry runs (errors 2,210 to 337 to 103 to 77 to 8 to 1), then 5 real deploys rejected as a whole (1 component each: missing static resource or a `usf3`-dependent component), then deploy `0AfdL00000i5D6YSAU` succeeded. Nothing was partially deployed by the rejected attempts.
+
+### Follow-ups for Ascend
+
+1. **Custom labels with Production Ids** (e.g. `Feedback_Client_RecordTypeId`, `Feedback_Internal_RecordTypeId`, `Feedback_Escalation_RecordTypeId`, `Company_Holiday_Project_Id`, `Ascend_Leadership_Role_Id`, `Ascend_Sales_Leaders_Role_Id`, `Ascend_Solution_Leaders_Role_Id`, `SAS_Sales_Leaders_Role_Id`, `Opportunity_Allowed_Submitters`, `Churn_Case_Record_Type_Id`) still hold Production record Ids. Update them to the Ascend Ids or the related flows/classes take the wrong branch.
+2. **Triggers and flows are active**: they fire on data loads (price book / cost book entries, products, etc.).
+3. **Field-level security**: new objects and fields have no FLS for users yet; grant access with a permission set.
+4. **Opportunity Splits**: enable in Setup, then deploy `Project_After_Insert_Update`.
+5. **Managed packages**: install Rollup Helper, 24Files, Conga, `usf3` (Flow Screen Components) and `ecflc` in Ascend if the skipped components are needed, then deploy them.
+6. **Email alerts**: re-add recipients and org-wide sender addresses that exist in Ascend; add letterhead logos if needed.
 
 ## Errors and resolution
 

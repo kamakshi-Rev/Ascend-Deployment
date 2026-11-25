@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Notify approver</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Case Deployment Recalled</name>
+    <style>none</style>
+    <subject>Case Deployment Approval RECALLED Case# {!Case.CaseNumber}</subject>
+    <textOnly>{!Case.OwnerFullName} has RECALLED the approval request below. The will resubmit at a future date.
+
+Case number:  {!Case.CaseNumber}
+Case Subject:  {!Case.Subject}
+Account Name:  {!Case.Account}
+
+Link:  {!Case.Link}
+
+Internal: {!ApprovalRequest.Internal_URL}
+
+External: {!ApprovalRequest.External_URL}
+
+Please use the link above to review the the case and provide approval as appropriate.
+
+Respectfully,
+Ascend Salesforce Support
+salesforce.support@teamascend.com</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

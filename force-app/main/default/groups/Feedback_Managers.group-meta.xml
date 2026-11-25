@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Group xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>A public group for users responsible for reviewing, managing, and responding to Feedback records, including escalations.</description>
+    <doesIncludeBosses>true</doesIncludeBosses>
+    <name>Feedback Managers</name>
+</Group>

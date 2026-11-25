@@ -1,0 +1,9 @@
+Hi Team,
+
+{!Project_Estimate__c.Name}'s Status has been changed to "{!Project_Estimate__c.Status__c}" by {!Project_Estimate__c.LastModifiedBy}
+
+The Estimate Record can be reached by the URL bellow:
+
+https://doextra--pilot.sandbox.lightning.force.com/{!Project_Estimate__c.Id}
+
+Thank you!

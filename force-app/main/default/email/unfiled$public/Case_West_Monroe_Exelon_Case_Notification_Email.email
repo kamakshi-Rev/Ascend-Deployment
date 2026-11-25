@@ -1,0 +1,59 @@
+<html>
+<body>
+
+<p>Hello team,</p>
+
+<p>
+Below are the High and Medium priority cases approaching SLA breach based on today's automated check.
+</p>
+
+<p>
+<strong>Full Report:</strong><br>
+https://teamascend.lightning.force.com/lightning/r/Report/00OUv000002QawLMAS/viewE<br>
+<a href="https://teamascend.lightning.force.com/lightning/r/Report/00OUv000002QawLMAS/view" target="_blank">Click here to view the full SLA Risk Report in Salesforce</a>
+</p>
+
+<h2 style="font-family: Arial, sans-serif; margin-top: 24px;">
+High Priority Cases (2 days before SLA)
+</h2>
+
+<table border="1" cellpadding="6" cellspacing="0" 
+       style="border-collapse: collapse; width: 100%; font-family: Arial;">
+  <tr style="background: #f2f2f2;">
+    <th>Case #</th>
+    <th>Owner</th>
+    <th>Status</th>
+    <th>Case Age</th>
+  </tr>
+
+  {{!varHighRows}}
+
+</table>
+
+<br><br>
+
+<h2 style="font-family: Arial, sans-serif; margin-top: 24px;">
+Medium Priority Cases (5 days before SLA)
+</h2>
+
+<table border="1" cellpadding="6" cellspacing="0" 
+       style="border-collapse: collapse; width: 100%; font-family: Arial;">
+  <tr style="background: #f2f2f2;">
+    <th>Case #</th>
+    <th>Owner</th>
+    <th>Status</th>
+    <th>Case Age</th>
+  </tr>
+
+  {{!varMediumRows}}
+
+</table>
+
+<br><br>
+
+<p style="color:#666; font-family: Arial;">
+This email was generated automatically by Salesforce.
+</p>
+
+</body>
+</html>

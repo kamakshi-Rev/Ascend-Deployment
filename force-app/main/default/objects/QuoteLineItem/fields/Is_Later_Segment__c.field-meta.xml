@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Later_Segment__c</fullName>
+    <description>Mirrors Quote Line Group Is Later Segment. False when the line has no segment (non-ramp). Mapped to Opportunity Product on quote sync.</description>
+    <formula>IF(ISBLANK(QuoteLineGroupId), FALSE, QuoteLineGroup.Is_Later_Segment__c)</formula>
+    <label>Is Later Segment</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>
